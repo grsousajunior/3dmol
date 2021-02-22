@@ -1,0 +1,33 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+        <title>testIsoColorbyDensity</title>
+        <script src="testIsoColorbyDensity_files/3Dmol.js"></script>               
+        </head>
+        
+        <body style="margin:0;padding:0">
+    
+<div id="gldiv" style="width: 100vw; height: 100vh; position: relative;"><canvas id="undefined" style="width: 1920px; height: 938px; padding: 0px; position: absolute; top: 0px; left: 0px; z-index: 0;" width="3840" height="1876"></canvas></div>
+<script>var viewer=$3Dmol.createViewer($("#gldiv"));</script>
+<script>
+        var callback = function() {};
+        $.get('density.cub', function(density) {
+  viewer.addModel(density,'cube');
+  viewer.setStyle({stick:{}});
+  viewer.zoomTo();
+  viewer.render( );
+
+ $.get('esp.cub', function(esp) {
+     let densvol = new $3Dmol.VolumeData(density, 'cube');
+     let espvol = new $3Dmol.VolumeData(esp, 'cube');
+     viewer.addIsosurface(densvol, {isoval: 0.001, opacity: 0.9,
+            smoothness: 4, voldata: espvol,
+            volscheme: {gradient:'rwb', min:-.025, max:.025}});
+     viewer.render(callback);
+ });
+});
+
+
+        </script>        
+        
+    
+</body></html>
