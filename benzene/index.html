@@ -4,17 +4,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>x3Dmol.js Test</title>
+    <title>3Dmol.js Test</title>
 </head>
 <body>
-    <script src="https://3Dmol.org/build/3Dmol-min.js" async></script>     
+    <script src="https://3Dmol.org/build/3Dmol-min.js"></script>     
+    <script>
+
+        $.get('https://raw.githubusercontent.com/grsousajunior/x3dmol/main/benzene/benzene.mo16a.cube', function(data){
+            var voldata = new $3Dmol.VolumeData(data, "cube");
+            viewer.addIsosurface(voldata, {isoval: 0.01, color: "blue", alpha: 0.95, smoothness: 10});
+            viewer.addIsosurface(voldata, {isoval: -0.01, color: "red", alpha: 0.95, smoothness: 10});
+            viewer.setStyle({}, {stick:{}});
+            viewer.zoomTo();
+            viewer.render();
+            }, 'text');
+    </script>
     <div 
-        style="height: 300px; width: 300px; position: relative;" 
-        class='viewer_3Dmoljs' 
-        data-href="https://raw.githubusercontent.com/grsousajunior/x3dmol/main/benzene/benzene.sdf"
-        data-type="sdf"
-        data-style="stick"
-        data-surface="https://raw.githubusercontent.com/grsousajunior/x3dmol/main/benzene/benzene.mo16a.cube;opacity:.7;color:blue"
-        ></div>    
+    style="height: 300px; width: 300px; position: relative;" 
+    class='viewer_3Dmoljs' 
+    data-href="https://raw.githubusercontent.com/grsousajunior/x3dmol/main/benzene/benzene.sdf"
+    data-style="stick"
+    ></div>
+        <!--
+            data-type="sdf"
+        data-surface="voldata:'https://raw.githubusercontent.com/grsousajunior/x3dmol/main/benzene/benzene.mo16a.cube';transferfn:[{Color:0x0000ff,pos:-0.200},{Color:0x0000ff,pos:-0.005},{Color:0xff0000,pos: 0.005},{Color:0xff0000,pos: 0.200}];opacityfn:[{opacity:1.0,pos:-0.2},{opacity:0,pos:-0.005},{opacity:0,pos:0.005},{opacity:1.0,pos:0.2}]"
+        azul: 0x00557F
+        amarelo: 0xFFAA00
+        data-surface="voldata:'https://raw.githubusercontent.com/grsousajunior/x3dmol/main/benzene/benzene.mo16a.cube';transferfn:[{Color:0x0000ff,pos:-0.200},{Color:0x0000ff,pos:-0.005},{Color:0xff0000,pos: 0.005},{Color:0xff0000,pos: 0.200}];opacityfn:[{opacity:1.0,pos:-0.2},{opacity:0,pos:-0.005},{opacity:0,pos:0.005},{opacity:1.0,pos:0.2}]"
+    -->
+
 </body>
 </html>
