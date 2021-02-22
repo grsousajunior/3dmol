@@ -10,13 +10,13 @@
 <script>var viewer=$3Dmol.createViewer($("#gldiv"));</script>
 <script>
         var callback = function() {};
-        $.get('density.cub', function(density) {
+        $.get('testIsoColorbyDensity_files/density.cub', function(density) {
   viewer.addModel(density,'cube');
   viewer.setStyle({stick:{}});
   viewer.zoomTo();
   viewer.render( );
 
- $.get('esp.cub', function(esp) {
+ $.get('testIsoColorbyDensity_files/esp.cub', function(esp) {
      let densvol = new $3Dmol.VolumeData(density, 'cube');
      let espvol = new $3Dmol.VolumeData(esp, 'cube');
      viewer.addIsosurface(densvol, {isoval: 0.001, opacity: 0.9,
