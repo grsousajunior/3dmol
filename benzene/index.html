@@ -5,52 +5,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3Dmol.js Test</title>
-    <script src="https://3Dmol.org/build/3Dmol-min.js"></script>     
-    <style>
-    .mol-container {
-      width: 60%;
-      height: 400px;
-      position: relative;
-    }
-    </style>
+    <script src="files/3Dmol.js"></script>     
 <body>
-    <!--
-    
+    <div id="gldiv" data-href="benzene.sdf" style="width: 90vw; height: 90vh; position: relative;"></div>
     <script>
+        
+        var viewer=$3Dmol.createViewer($("#gldiv"));
 
-        $.get('https://raw.githubusercontent.com/grsousajunior/x3dmol/main/benzene/benzene.mo16a.cube', function(data){
+        $.get('/files/benzene.mo16a.cube', function(data){
             var voldata = new $3Dmol.VolumeData(data, "cube");
-            viewer.addIsosurface(voldata, {isoval: 0.01, color: "blue", alpha: 0.95, smoothness: 10});
-            viewer.addIsosurface(voldata, {isoval: -0.01, color: "red", alpha: 0.95, smoothness: 10});
-            viewer.setStyle({}, {stick:{}});
+            viewer.addIsosurface(voldata, {isoval: +0.02, color: "#00557F", alpha: 0.95, smoothness: 2});
+            viewer.addIsosurface(voldata, {isoval: -0.02, color: "#FFAA00", alpha: 0.95, smoothness: 2});
+            viewer.setStyle({stick:{}}, {});
             viewer.zoomTo();
             viewer.render();
             }, 'text');
+
+       /*
+            $.get('files/benzene.mo16a.cube', function(data){
+                var voldata = new $3Dmol.VolumeData(data, "cube");
+                if(viewer.hasVolumetricRender()) {
+                    viewer.addVolumetricRender(voldata, {transferfn: [{color: "#00557F", opacity: .075, value: 0.2},
+                                                                    {color: "#00557F", opacity: .001, value: 0.01},
+                                                                    {color: "#FFAA00", opacity: .001, value: -0.01},
+                                                                    {color: "#FFAA00", opacity: .075, value: -0.2}]});
+                } else {
+                    viewer.addIsosurface(voldata, {isoval: 0.01, color: "blue", alpha: 0.95, smoothness: 10});              
+                    viewer.addIsosurface(voldata, {isoval: -0.01, color: "red", alpha: 0.95, smoothness: 10}); 
+                }
+                viewer.setStyle({}, {stick:{}});
+                viewer.zoomTo();
+                viewer.render();
+            }, 'text');
+            */
+
     </script>
+    <!--
     <div 
     style="height: 300px; width: 300px; position: relative;" 
     class='viewer_3Dmoljs' 
-    data-href="https://raw.githubusercontent.com/grsousajunior/x3dmol/main/benzene/benzene.sdf"
+    data-href="benzene.sdf"
     data-style="stick"
-    ></div>
-        <!--
-            data-type="sdf"
+    >
+    </div>
+        data-type="sdf"
         data-surface="voldata:'https://raw.githubusercontent.com/grsousajunior/x3dmol/main/benzene/benzene.mo16a.cube';transferfn:[{Color:0x0000ff,pos:-0.200},{Color:0x0000ff,pos:-0.005},{Color:0xff0000,pos: 0.005},{Color:0xff0000,pos: 0.200}];opacityfn:[{opacity:1.0,pos:-0.2},{opacity:0,pos:-0.005},{opacity:0,pos:0.005},{opacity:1.0,pos:0.2}]"
         azul: 0x00557F
         amarelo: 0xFFAA00
         data-surface="voldata:'https://raw.githubusercontent.com/grsousajunior/x3dmol/main/benzene/benzene.mo16a.cube';transferfn:[{Color:0x0000ff,pos:-0.200},{Color:0x0000ff,pos:-0.005},{Color:0xff0000,pos: 0.005},{Color:0xff0000,pos: 0.200}];opacityfn:[{opacity:1.0,pos:-0.2},{opacity:0,pos:-0.005},{opacity:0,pos:0.005},{opacity:1.0,pos:0.2}]"
     -->
-    <div id="container-01" class="mol-container"></div>
-    <script>
-    $(function() {
-      let element = $('#container-01');
-      let config = { backgroundColor: 'orange' };
-      let viewer = $3Dmol.createViewer( element, config );
-      viewer.addSphere({ center: {x:0, y:0, z:0}, radius: 10.0, color: 'green' });
-      viewer.zoomTo();
-      viewer.render();
-      viewer.zoom(0.8, 2000);
-    });
-    </script>
 </body>
 </html>
